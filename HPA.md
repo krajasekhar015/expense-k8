@@ -57,7 +57,7 @@ kubectl top pods
 ```
 https://github.com/kubernetes-sigs/metrics-server
 ```
-- Run the following command
+- Copy & Run the following command
 ```
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
@@ -89,7 +89,7 @@ To set default namespace, we have to install a tool called `kubens`. Go to the f
 ```
 https://github.com/ahmetb/kubectx
 ```
-- Run the following commands:
+- Copy & Run the following commands:
 ```
 sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
 ```
@@ -113,10 +113,85 @@ sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 ```
 https://github.com/derailed/k9s
 ```
-- Run the command
+- Copy & Run the command
 ```
 curl -sS https://webinstall.dev/k9s | bash
 ```
+- After completion, one in new terminal and run `k9s`
+
+![alt text](images/k9s.png)
+
+- Here, if we press `l` then it will open logs. If we want to go back, then press `ESC`
+- Press `shft+:` and type `namespace`. It will display all the namespaces.
+- If we type `service`, it will display all the available services
+- If we type `hpa`, it will display all the available HPA's
+- If we type `pods`, it will display all the available pods
+
+![alt text](images/k9s-mysql.png)
+- Here, for mysql the resources like CPU and mermory are showing as n/a (Not Applicable) since we haven't mention resource section in mysql.
+
+
+
+
+
+
+
+- Horizontal Pod Autoscaler will increases the number of pods based on the traffic. So, we can take CPU utilization as the metric. Before applying HPA, we should have the metric server installed,should have the resources mentioned in side the pod and we can attach HPA to the deployment. 
+
+```
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: backend
+ namespace: expense
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: backend
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 15 # usually 75 in real environment
+```
+```
+kubectl apply -f manifest.yaml
+```
+```
+kubectl get hpa
+```
+![alt text](images/get-hpa.png)
+
+![alt text](images/hpa-15%.png)
+
+Since here the CPU utilization is less than 15%, it will automatically removes one pod from two pods.
+
+- If we want to see this, we need to keep pressure on the application using the commandline called `apache bench`. It will increase the load on the application
+- Go to the following location
+```
+https://serverfault.com/questions/514401/how-to-install-apache-benchmark-on-centos
+```
+- Copy and Run the following command
+```
+sudo dnf install httpd-tools -y
+```
+- Now, we need to test the load on the application using the following command:
+```
+https://stackoverflow.com/questions/12732182/ab-load-testing
+```
+```
+ab -k -c 350 -n 20000 example.com/
+```
+- Here, `k` stands for `Use HTTP KeepAlive feature`, `-c` stands for `concurrency - Number of multiple requests to make at a time` and `-n` stands for `requests - Number of requests to perform`
+
+We can also get more information on this using the command 
+```
+ab --help
+```
+
+
+
+
+
 
 
 
