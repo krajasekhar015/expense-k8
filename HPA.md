@@ -161,7 +161,7 @@ kubectl get hpa
 ```
 ![alt text](images/get-hpa.png)
 
-![alt text](images/hpa-15%.png)
+![alt text](images/hpa-15.png)
 
 Since here the CPU utilization is less than 15%, it will automatically removes one pod from two pods.
 
