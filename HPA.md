@@ -41,7 +41,7 @@ Suppose our application is running and traffic increases on application then we 
  * We should have metrics server installed 
  * We should mention resource section inside pod
 
-What is metric-server?
+**What is metric-server?** <br>
 The Metrics Server is a Kubernetes add-on that collects resource usage data from nodes and pods in a Kubernetes cluster. It provides CPU and memory metrics, which are crucial for autoscaling, monitoring, and optimizing the performance of applications running within the cluster.
 
 - If we give `top` command, we can see which process is consuming more resources like CPU, Memory
