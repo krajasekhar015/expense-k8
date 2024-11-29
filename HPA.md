@@ -99,7 +99,8 @@ sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
 ```
 sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 ```
-![alt text](mysql/kubens.png)
+
+![alt text](images/kubens.png)
 
 
 > Note: In general, HPA will only works for stateless applications, but won't work for stateful applications like database (mysql)
