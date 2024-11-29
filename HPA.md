@@ -188,6 +188,31 @@ We can also get more information on this using the command
 ab --help
 ```
 
+- Now, run the command
+```
+kubectl get svc
+```
+and copy the loadbalancer URL and search in the browser.
+
+Now, run the command:
+```
+ab -n 50000 -c 500 http://a8f75e174e4b54e339f46cf4fd250891-971991030.us-east-1.elb.amazonaws.com:80/
+```
+Here, in the URL we need to give :80/ at the last.
+
+![alt text](images/hpa-1.png)
+![alt text](images/hpa-2.png)
+
+```
+ab -n 5000 -c 100 -s 60 http://a8f75e174e4b54e339f46cf4fd250891-971991030.us-east-1.elb.amazonaws.com:80/
+```
+- In this command, we have mentioned timeout and also we will get complete report.
+
+
+
+
+
+
 
 
 
