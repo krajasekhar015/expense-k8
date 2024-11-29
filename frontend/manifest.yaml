@@ -1,8 +1,8 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: frontend
-  namespace: expense
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: frontend
+#   namespace: expense
 # data:
 #   nginx.conf: | # | represents multi line file
 #     user www-data;
@@ -91,7 +91,7 @@ metadata:
 #         }
 
 #     }
----
+# ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -145,7 +145,7 @@ metadata:
   name: frontend
   namespace: expense
 spec:
-  #type: LoadBalancer
+  type: LoadBalancer
   selector:
     app: frontend
     tier: web
