@@ -69,6 +69,58 @@ kubectl get pods -n kube-system
 
 - In the above image at the bottom, we can see that metric server has been got installed
 
+- Now, create namespace and mysql pods
+```
+kubectl apply -f namespace.yaml
+```
+Now, go to `mysql` folder and apply the command
+```
+kubectl apply -f manifest.yaml
+```
+
+Now, apply the command
+```
+kubectl top pods
+```
+- First it will display as `error: metrics not available yet`. Re-run the command twice, then it will get as shown below
+![alt text](images/kubectl-top-pods.png)
+
+To set default namespace, we have to install a tool called `kubens`. Go to the following location:
+```
+https://github.com/ahmetb/kubectx
+```
+- Run the following commands:
+```
+sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
+```
+```
+sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+```
+```
+sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+```
+![alt text](mysql/kubens.png)
+
+
+> Note: In general, HPA will only works for stateless applications, but won't work for stateful applications like database (mysql)
+
+## Installing K9S Tool
+
+**K9s is an open-source, terminal-based user interface (UI) for managing and interacting with Kubernetes clusters**. It provides an efficient and intuitive way to monitor and manage Kubernetes resources like pods, deployments, services, namespaces, and more, all from a command-line interface (CLI). The goal of K9s is to provide a simple, powerful, and fast way to interact with Kubernetes resources, while leveraging the familiar Kubernetes API and kubectl commands under the hood.
+
+- Go to the following location
+```
+https://github.com/derailed/k9s
+```
+- Run the command
+```
+curl -sS https://webinstall.dev/k9s | bash
+```
+
+
+
+
+
 
 
 
